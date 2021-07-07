@@ -1,3 +1,14 @@
-body{
-    background-color:rgb(224, 217, 217) ;
+
+.imagen{
+    background-image: url('sun.jpg');
+}
+
+.titulo, .footer{
+    text-align: center;
+    font-family: "Audiowide", sans-serif;
+    background-color: rgb(107, 104, 104);
+}
+
+th, td, tbody{
+    text-align: center;
 }

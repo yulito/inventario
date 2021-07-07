@@ -1,0 +1,78 @@
+
+   {% extends 'core/index.html' %}
+   {% load static %}
+   {% block content %}
+           <br>
+        <table class="table table-bordered">
+            <thead>
+              <tr>
+                <th scope="col">ID</th> <!--correlativo-->
+                <th scope="col">Nro Serie</th> <!--nro serie-->
+                <th scope="col">Dispositivo</th> <!--tipo dispositivo-->
+                <th scope="col">Modelo</th> <!--modelo-->
+                <th scope="col">Estado</th> <!--estado-->
+                <th scope="col">Ver Detalle</th> <!--boton-->
+              </tr>
+            </thead>
+            <tbody>
+              {% for disp in disp %}
+              <tr>
+                <th scope="row">{{ disp.idCorrel }}</th>
+                <td>{{ disp.nroSerie }}</td>
+                <td>{{ disp.tipo_dispositivoo.nomTipo}}</td>
+                <td>{{ disp.modeloo.nomModelo }}</td>
+                <td>{{ disp.estadoo.nomEstado }}</td>
+                <td>
+                  <!--<button type="button" disabled  name="btActualizar" id="btActualizar" align="right" class="btn  btn-success" onclick="javascript:mpProducto.actualizar();"><i class="fa fa-floppy-save"></i> Ver</button>-->
+                  <button type="button" name="btVer" id="btVer" class="btn  btn-info"> Ver</button>
+                  <button type="button" name="btIngresar" id="btIngresar" class="btn  btn-success"> Ingresar</button>
+                  <button type="button" name="btEliminar" id="btEliminar" class="btn  btn-danger" > Eliminar</button>
+                </td>
+              </tr>
+              {% endfor %} 
+            </tbody>
+          </table>
+
+          <!------------------------AQUÍ DEBE DE IR EL MODAL------------------------>
+          
+          <div class="modal" id="modalDispositivo" tabindex="-1" role="dialog">
+            <div class="modal-dialog" role="document">
+              <div class="modal-content">
+                <div class="modal-header">
+                  <h5 class="modal-title">Detalle de Dispositivo</h5>
+                  <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                  </button>
+                </div>
+                <div class="modal-body">
+                  <form>
+                    <div class="form-group">
+                      <label for="correlativo">ID</label>
+                      <input type="number" class="form-control md-2" id="idcorr">
+                      <!--<small id="emailHelp" class="form-text text-muted">We'll never share your email with anyone else.</small>-->
+                    </div>
+                    <div class="form-group">
+                      <label for="">Nro de Serie</label>
+                      <input type="text" class="form-control md-2" id="idNro">
+                    </div>
+                    <div class="form-group">
+                      <label for="">Nombre Dispositivo</label>
+                      <input type="text" class="form-control md-2" id="idNom">
+                    </div>
+                    <div class="form-group">
+                      <label for="">Comentario</label>
+                      <textarea class="form-control md-2" id="Textarea1" rows="3"></textarea>
+                    </div>
+                    
+
+                  </form>
+                </div>
+                <div class="modal-footer">
+                  <button type="button" class="btn btn-primary">Guardar Cambios</button>
+                  <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancelar</button>
+                </div>
+              </div>
+            </div>
+          </div>
+          
+   {% endblock %}
