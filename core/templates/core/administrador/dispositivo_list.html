@@ -2,30 +2,36 @@
    {% extends 'core/index.html' %}
    {% load static %}
    {% block content %}
+   <div class="listDisp">
+    <h1>lista de Dispositivos</h1>
+   </div>
+   <div>
+    <button type="button" name="btIngresar" id="btIngresar" class="btn  btn-info"> Agregar</button>
+   </div>
            <br>
         <table class="table table-bordered">
             <thead>
               <tr>
-                <th scope="col">ID</th> <!--correlativo-->
-                <th scope="col">Nro Serie</th> <!--nro serie-->
-                <th scope="col">Dispositivo</th> <!--tipo dispositivo-->
-                <th scope="col">Modelo</th> <!--modelo-->
-                <th scope="col">Estado</th> <!--estado-->
-                <th scope="col">Ver Detalle</th> <!--boton-->
+                <th scope="col">ID</th> 
+                <th scope="col">Dispositivo</th>
+                <th scope="col">Marca</th>
+                <th scope="col">Nro Serie</th>                  
+                <th scope="col">Modelo</th> 
+                <th scope="col">Estado</th> 
+                <th scope="col">Ver Detalle</th> 
               </tr>
             </thead>
             <tbody>
               {% for disp in disp %}
               <tr>
                 <th scope="row">{{ disp.idCorrel }}</th>
-                <td>{{ disp.nroSerie }}</td>
                 <td>{{ disp.tipo_dispositivoo.nomTipo}}</td>
+                <td>{{disp.marcaa.nomMarca}}</td>
+                <td>{{ disp.nroSerie }}</td>                
                 <td>{{ disp.modeloo.nomModelo }}</td>
                 <td>{{ disp.estadoo.nomEstado }}</td>
                 <td>
-                  <!--<button type="button" disabled  name="btActualizar" id="btActualizar" align="right" class="btn  btn-success" onclick="javascript:mpProducto.actualizar();"><i class="fa fa-floppy-save"></i> Ver</button>-->
-                  <button type="button" name="btVer" id="btVer" class="btn  btn-info"> Ver</button>
-                  <button type="button" name="btIngresar" id="btIngresar" class="btn  btn-success"> Ingresar</button>
+                  <button type="button" name="btVer" id="btVer" class="btn  btn-success"> Ver</button>
                   <button type="button" name="btEliminar" id="btEliminar" class="btn  btn-danger" > Eliminar</button>
                 </td>
               </tr>
@@ -48,23 +54,76 @@
                   <form>
                     <div class="form-group">
                       <label for="correlativo">ID</label>
-                      <input type="number" class="form-control md-2" id="idcorr">
-                      <!--<small id="emailHelp" class="form-text text-muted">We'll never share your email with anyone else.</small>-->
+                      <input type="number" class="form-control md-2" id="idcorr" disabled>
+                    </div>
+                    <div class="form-group">
+                      <label for="">Dispositivo</label>
+                      <select class="form-control md-2" id="idNom">
+                        <option selected>Selecciona Dispositivo...</option>
+                        <option value="1">One</option>
+                        <option value="2">Two</option>
+                        <option value="3">Three</option>
+                      </select>
+                    </div>
+                    <div class="form-group">
+                      <label for="">Marca</label>
+                      <select class="form-control md-2" id="idMar">
+                        <option selected>Selecciona Marca...</option>
+                        <option value="1">One</option>
+                        <option value="2">Two</option>
+                        <option value="3">Three</option>
+                      </select>
+                    </div>
+                    <div class="form-group">
+                      <label for="">Modelo</label>
+                      <select class="form-control md-2" id="idMod">
+                        <option selected>Selecciona Modelo...</option>
+                        <option value="1">One</option>
+                        <option value="2">Two</option>
+                        <option value="3">Three</option>
+                      </select>
                     </div>
                     <div class="form-group">
                       <label for="">Nro de Serie</label>
                       <input type="text" class="form-control md-2" id="idNro">
                     </div>
                     <div class="form-group">
-                      <label for="">Nombre Dispositivo</label>
-                      <input type="text" class="form-control md-2" id="idNom">
-                    </div>
-                    <div class="form-group">
                       <label for="">Comentario</label>
                       <textarea class="form-control md-2" id="Textarea1" rows="3"></textarea>
                     </div>
-                    
-
+                    <div class="form-check">
+                      <input class="form-check-input" type="radio" name="estado" id="idEstado" value="option1" checked>
+                      <label class="form-check-label" for="exampleRadios1">
+                        Habilitado
+                      </label>
+                    </div>
+                    <div class="form-check">
+                      <input class="form-check-input" type="radio" name="estado" id="idEstado" value="option2">
+                      <label class="form-check-label" for="exampleRadios2">
+                        Deshabilitado
+                      </label>
+                    </div>
+                    <div class="form-check disabled">
+                      <input class="form-check-input" type="radio" name="estado" id="idEstado" value="option3" >
+                      <label class="form-check-label" for="exampleRadios3">
+                        En Uso
+                      </label>
+                    </div>
+                    <br>
+                    <div class="form-group">
+                      <label for="">Sucursal</label>
+                      <select class="form-control md-2" id="idSuc">
+                        <option selected>Selecciona Sucursal...</option>
+                        <option value="1">One</option>
+                        <option value="2">Two</option>
+                        <option value="3">Three</option>
+                      </select>
+                    </div>                   
+                    <div class="form-group">
+                      <label for="">Usuario</label>
+                      <input type="text" class="form-control md-2" id="idUsu" placeholder="Ingrese rut xxxxxxxx-x">
+                    </div>
+                    <small id="emailHelp" class="form-text text-muted">Antes de guardar verifique los cambios</small>
                   </form>
                 </div>
                 <div class="modal-footer">

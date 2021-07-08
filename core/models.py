@@ -2,7 +2,6 @@ from django.db import models
 from django.db.models.constraints import UniqueConstraint
 from django.db.models.fields import CharField
 
-#region, comuna, sucursal
 class Region(models.Model):
     idRegion = models.IntegerField(blank=False, null=False, primary_key=True)
     nomRegion = models.CharField(max_length=70, blank=True, null=True)
@@ -57,6 +56,12 @@ class Estado(models.Model):
     class Meta:
         db_table = "estado"
 
+class Marca(models.Model):
+    idMarca = models.IntegerField(db_column='idMarca', primary_key=True)
+    nomMarca = models.CharField(max_length=20, blank=True, null=True)
+    class Meta:
+        db_table = "marca"
+
 class Dispositivo(models.Model):
     idCorrel = models.AutoField(blank=False, null=False, primary_key=True) 
     nroSerie = models.CharField(max_length=20, blank=False, null=False, unique=True)
@@ -65,8 +70,9 @@ class Dispositivo(models.Model):
     tipo_dispositivoo = models.ForeignKey(tipo_dispositivo, blank=False, null=False, on_delete=models.CASCADE)
     modeloo = models.ForeignKey(Modelo, blank=False, null=False, on_delete=models.CASCADE)
     estadoo = models.ForeignKey(Estado, blank=False, null=False, on_delete=models.CASCADE)
-    rutt = models.ForeignKey(Usuario, blank=False, null=False, on_delete=models.CASCADE)
+    rutt = models.ForeignKey(Usuario, blank=True, null=True, on_delete=models.CASCADE)
     sucursall = models.ForeignKey(Sucursal, blank=False, null=False, on_delete=models.CASCADE)
+    marcaa = models.ForeignKey(Marca, blank=True, null=True, on_delete=models.CASCADE)
     class Meta:
         db_table = "dispositivo"
 
