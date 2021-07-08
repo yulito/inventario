@@ -9,6 +9,18 @@ def index(request):
 def dispositivo_list(request):
     print('estoy en en listar dispositivo')
     disp = Dispositivo.objects.all()
-    context ={'disp':disp}
+    tipo = tipo_dispositivo.objects.all()
+    mode = Modelo.objects.all()
+    #estad = Estado.objects.all()
+    sucursa = Sucursal.objects.all()
+    marc = Marca.objects.all()
+    context ={'disp':disp,
+              'tipo':tipo,
+              'mode':mode,
+
+              'sucursa':sucursa,
+              'marc':marc}
     return render(request, 'core/administrador/dispositivo_list.html', context)
 
+def agregarDispositivo(request):
+    pass

@@ -5,4 +5,5 @@ from . import views
 urlpatterns = [
 	path('index', views.index, name='index'),
 	path('dispositivo_list', views.dispositivo_list, name='dispositivo_list'),
+	path('agregarDispositivo', views.agregarDispositivo, name='agregarDispositivo'),
 ]	
