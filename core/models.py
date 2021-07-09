@@ -65,7 +65,6 @@ class Marca(models.Model):
 class Dispositivo(models.Model):
     idCorrel = models.AutoField(blank=False, null=False, primary_key=True) 
     nroSerie = models.CharField(max_length=20, blank=False, null=False, unique=True)
-    nomDisp = models,CharField(max_length=30, blank=True, null=True, unique=True)
     comentario = models.CharField(max_length=2000, blank=True, null=True)
     tipo_dispositivoo = models.ForeignKey(tipo_dispositivo, blank=False, null=False, on_delete=models.CASCADE)
     modeloo = models.ForeignKey(Modelo, blank=False, null=False, on_delete=models.CASCADE)
