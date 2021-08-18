@@ -1,0 +1,65 @@
+{% extends 'core/index.html' %}
+   {% load static %}
+   {% block content %}
+
+   <div class="listTipo">
+    <h1 >Tipos de Dispositivos</h1>
+   </div>
+   <div>
+      <button type="button" name="btAgregarTipo" id="btAgregarTipo" class="btn  btn-info"> Agregar</button>
+     </div>
+             <br>
+          <table class="table table-bordered">
+              <thead>
+                <tr>
+                  <th scope="col">ID</th> 
+                  <th scope="col">Dispositivo</th>
+                  <th scope="col">Acción</th> 
+                </tr>
+              </thead>
+              <tbody>
+                {% for tipoo in tipoo %}
+                <tr>
+                  <th scope="row">{{ tipoo.idTipoDisp }}</th>
+                  <td>{{ tipoo.nomTipo}}</td>
+                  <td>
+                    <button type="button" name="btEditarTipo" id="btEditarTipo" class="btn  btn-success" onclick="editarTipo('{{tipoo.idTipoDisp}}')"> Editar </button>
+                  </td>
+                </tr>
+                {% endfor %} 
+              </tbody>
+            </table>
+   </div>
+  
+
+          <!------------------------AQUÍ DEBE DE IR EL MODAL GUARDAR------------------------>
+          
+          <div class="modal" id="modalTipo" tabindex="-1" role="dialog">
+            <div class="modal-dialog" role="document">
+              <div class="modal-content">
+                <div class="modal-header">
+                  <h5 class="modal-title" id="tituloModelTipo">Ingresar Tipo Dispositivo</h5>
+                  <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                  </button>
+                </div>                
+                <div class="modal-body">
+                  <form>                                      
+                    <div class="form-group">
+                      <label for="correlativo">ID</label>
+                      <input type="number" class="form-control md-2" name="idTipo" id="idTipo" disabled>
+                    </div>
+                    <div class="form-group">
+                        <label for="">Dispositivo</label>
+                        <input type="text" class="form-control md-2" name="tipo" id="tipo" required=True >
+                      </div>
+                  </form>
+                </div>
+                <div class="modal-footer">
+                  <button type="button" id="GuardarTipo" class="btn btn-primary">Guardar</button>
+                  <button type="button" id="CancelarTipo" class="btn btn-secondary" data-dismiss="modal">Cancelar</button>
+                </div>
+              </div>
+            </div>
+          </div>
+   {% endblock %}

@@ -13,12 +13,13 @@
 	  {# CSS Bootstrap #}
 	  {% bootstrap_css %}
     <!------------------------>
-    <link rel="stylesheet" href="{% static 'CSS/index.css' %}">
     <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Audiowide">
+    <link rel="stylesheet" href="{% static 'CSS/index.css' %}">
+    
 </head>
 <body>
     <div class="titulo">
-        <h2>Bienvenido al Sistema de Inventario Sunchemical</h2>
+        <h2>Bienvenido al Sistema de Inventario</h2>
     </div>
     <!----------------------- AQUÍ DEBERIA DE IR UN NAVBAR ---------------------->
     <!--<a href="dispositivo_list">ok</a>-->
@@ -33,25 +34,33 @@
             <li class="nav-item active">
               <a class="nav-link" href="dispositivo_list">Dispositivos<span class="sr-only">(current)</span></a>
             </li>
-            <li class="nav-item">
-              <a class="nav-link" href="#">Link</a>
+            <li class="nav-item dropdown">
+              <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                Gestion Detalles
+              </a>
+              <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+                <a class="dropdown-item" href="marcas">Marcas</a>
+                <a class="dropdown-item" href="tipos">Tipo de Dispositivo</a>
+                <a class="dropdown-item" href="modelos">Modelos</a>
+              </div>
             </li>
             <li class="nav-item dropdown">
               <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                Dropdown
+                Gestion Usuarios
               </a>
               <div class="dropdown-menu" aria-labelledby="navbarDropdown">
-                <a class="dropdown-item" href="#">Action</a>
-                <a class="dropdown-item" href="#">Another action</a>
-                <div class="dropdown-divider"></div>
-                <a class="dropdown-item" href="#">Something else here</a>
+                <a class="dropdown-item" href="usuarios">Lista Usuarios</a>
+                <a class="dropdown-item" href="cargo">Cargo</a>
               </div>
-            </li>
-            <li class="nav-item">
+            </li> 
+             
+            <!-- <li class="nav-item">
               <a class="nav-link disabled" href="#">Disabled</a>
-            </li>
+            </li> 
+            -->         
+            
           </ul>
-          <form class="form-inline my-2 my-lg-0">
+          <form class="form-inline my-2 my-lg-0" id="buscador" hidden>
             <input class="form-control mr-sm-2" type="search" placeholder="Search" aria-label="Search">
             <button class="btn btn-outline-success my-2 my-sm-0" type="submit">Search</button>
           </form>
@@ -66,7 +75,7 @@
           {% block footer %}
           <hr>
           <div class="footer">
-            <p>Sun Chemical (Chile) S.A.</p>
+            <p>Inventario (Chile) S.A.</p>
           </div> 
           {% endblock %}
 
@@ -77,8 +86,12 @@
           
           <!-- REQUIRED SCRIPTS -->
          
-          <!-- jQuery -->
+          <!-- JavaScript -->
           <script src="{% static 'js/CrudDisp.js' %}"></script>
-          
+          <script src="{% static 'js/CrudMarca.js' %}"></script>
+          <script src="{% static 'js/CrudTipo.js' %}"></script>
+          <script src="{% static 'js/CrudCargo.js' %}"></script>
+          <script src="{% static 'js/CrudUsuario.js' %}"></script>
+          <script src="{% static 'js/CrudModelo.js' %}"></script>
 </body>
 </html>

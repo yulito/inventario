@@ -1,6 +1,8 @@
-
+body{
+    background-color: whitesmoke;
+}
 .imagen{
-    background-image: url('sun.jpg');
+    background-image: url('bodega.jpg');
 }
 
 .titulo, .footer{

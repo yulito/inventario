@@ -1,0 +1,113 @@
+{% extends 'core/index.html' %}
+{% load static %}
+{% block content %}
+<div class="listUsuario">
+ <h1>lista de Usuarios</h1>
+</div>
+<div>
+ <button type="button" name="btAgregarUsuario" id="btAgregarUsuario" class="btn  btn-info"> Agregar</button>
+</div>
+        <br>
+     <table class="table table-bordered">
+         <thead>
+           <tr>
+             <th scope="col">Rut</th> 
+             <th scope="col">Nombre</th>                  
+             <th scope="col">Apellido Paterno</th> 
+             <th scope="col">Apellido Materno</th> 
+             <th scope="col">Cargo</th>
+             <th scope="col">Acción</th> 
+           </tr>
+         </thead>
+         <tbody>
+           {% for usuarioo in usuarioo %}
+           <tr>
+             <th scope="row">{{ usuarioo.Rut }}</th>
+             <td>{{ usuarioo.nombre}}</td>
+             <td>{{usuarioo.apellido_pa}}</td>
+             <td>{{ usuarioo.apellido_ma }}</td>                
+             <td>{{ usuarioo.cargoo.nomCargo }}</td>
+             <td>
+               <button type="button" name="btEditarUsuario" id="btEditarUsuario" class="btn  btn-success" onclick="editarUsuario('{{usuarioo.Rut}}')"> Editar </button>
+               <!--<button type="button" name="btEliminar" id="btEliminar" class="btn  btn-danger" > Eliminar</button>-->
+             </td>
+           </tr>
+           {% endfor %} 
+         </tbody>
+       </table>
+
+       <!------------------------AQUÍ DEBE DE IR EL MODAL------------------------>
+       
+       <div class="modal" id="modalUsuario" tabindex="-1" role="dialog">
+         <div class="modal-dialog" role="document">
+           <div class="modal-content">
+             <div class="modal-header">
+               <h5 class="modal-title" id="#tituloModelUsuario">Ingresar Usuario</h5>
+               <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                 <span aria-hidden="true">&times;</span>
+               </button>
+             </div>
+             
+             <div class="modal-body">
+               <form class="frmUsuario">                                    
+                 <div class="form-group">
+                   <label for="correlativo">ID</label>
+                   <input type="text" class="form-control md-2" name="rut" id="idRut" required>
+                 </div>
+                 <div class="form-group">
+                   <label for="">Nombre Usuario</label>
+                   <input type="text" class="form-control md-2" name="nombre" id="idNombre" required>
+                 </div>
+                 <div class="form-group">
+                    <label for="correlativo">Apellido Paterno</label>
+                    <input type="text" class="form-control md-2" name="apePa" id="idApePa" required>
+                  </div>
+                  <div class="form-group">
+                    <label for="">Apellido Materno</label>
+                    <input type="text" class="form-control md-2" name="apeMa" id="idApeMa" required>
+                  </div>
+                 <div class="form-group">
+                   <label for="">Cargo</label>
+                   <select class="form-control md-2" name="cargo" id="idCargo" required>
+                     <option disabled selected >Selecciona el Cargo...</option>
+                     {% for cargo in cargo %}
+                     <option value="{{cargo.idCargo}}">{{cargo.nomCargo}}</option>
+                     {% endfor %}
+                   </select>
+                 </div> 
+
+               </form>
+             </div>
+             <div class="modal-footer">
+               <button type="button" id="GuardarUsuario" class="btn btn-primary">Guardar</button>
+               <button type="button" id="CancelarUsuario" class="btn btn-secondary" data-dismiss="modal">Cancelar</button>
+             </div>
+           </div>
+         </div>
+       </div>
+
+       <!------------------------- ACA EL MODAL PARA EDITAR ------------------------>
+       <div class="modal" id="modalUsuarioEd" tabindex="-1" role="dialog">
+        <div class="modal-dialog" role="document">
+          <div class="modal-content">
+            <div class="modal-header">
+              <h5 class="modal-title" >Editar Usuario</h5>
+              <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                <span aria-hidden="true">&times;</span>
+              </button>
+            </div>
+            
+            <div class="modal-body">
+              <form class="frmUsuarioEd"> 
+                <!--------------------------------------------------------------------------------->                                   
+                
+              </form>
+            </div>
+            <div class="modal-footer" id="footerEd">
+
+            </div>
+          </div>
+        </div>
+      </div>
+       
+{% endblock %}

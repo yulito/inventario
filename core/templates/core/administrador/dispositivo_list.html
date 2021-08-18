@@ -6,7 +6,7 @@
     <h1>lista de Dispositivos</h1>
    </div>
    <div>
-    <button type="button" name="btIngresar" id="btIngresar" class="btn  btn-info"> Agregar</button>
+    <button type="button" name="btIngresarDispositivo" id="btIngresarDispositivo" class="btn  btn-info"> Agregar</button>
    </div>
            <br>
         <table class="table table-bordered">
@@ -14,25 +14,32 @@
               <tr>
                 <th scope="col">ID</th> 
                 <th scope="col">Dispositivo</th>
-                <th scope="col">Marca</th>
-                <th scope="col">Nro Serie</th>                  
+                <th scope="col">Marca</th>  
+                <th scope="col">Nro Serie</th>                 
                 <th scope="col">Modelo</th> 
                 <th scope="col">Estado</th> 
-                <th scope="col">Ver Detalle</th> 
+                <th scope="col">Usuario</th>
+                <th scope="col">Acción</th> 
               </tr>
             </thead>
             <tbody>
               {% for disp in disp %}
               <tr>
                 <th scope="row">{{ disp.idCorrel }}</th>
-                <td>{{ disp.tipo_dispositivoo.nomTipo}}</td>
-                <td>{{disp.marcaa.nomMarca}}</td>
+                <td>{{ disp.modeloo.tipo_dispositivoo.nomTipo}}</td>
+                <td>{{disp.modeloo.marcaa.nomMarca}}</td>
                 <td>{{ disp.nroSerie }}</td>                
                 <td>{{ disp.modeloo.nomModelo }}</td>
                 <td>{{ disp.estadoo.nomEstado }}</td>
+                {% if disp.rutt %}
+                <td>{{ disp.rutt.nombre }}</td>
+                {% else %}
+                <td> -- </td>
+                {% endif %} 
                 <td>
-                  <button type="button" name="btVer" id="btVer" class="btn  btn-success"> Ver</button>
-                  <button type="button" name="btEliminar" id="btEliminar" class="btn  btn-danger" > Eliminar</button>
+                  <button type="button" name="btEditarDispositivo" id="btEditarDispositivo" class="btn  btn-success" onclick="editarDispositivo('{{ disp.idCorrel }}')"> Editar </button>
+            <!-- <button type="button" name="btEliminar" id="btEliminar" class="btn  btn-danger" > Eliminar</button> -->  
+                  
                 </td>
               </tr>
               {% endfor %} 
@@ -45,42 +52,25 @@
             <div class="modal-dialog" role="document">
               <div class="modal-content">
                 <div class="modal-header">
-                  <h5 class="modal-title">Detalle de Dispositivo</h5>
+                  <h5 class="modal-title">Ingresar Dispositivo</h5>
                   <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                     <span aria-hidden="true">&times;</span>
                   </button>
                 </div>
                 
                 <div class="modal-body">
-                  <form>
+                  <form class="frmDispositivo">
                                        
                     <div class="form-group">
                       <label for="correlativo">ID</label>
                       <input type="number" class="form-control md-2" id="idcorr" disabled>
                     </div>
-                    <div class="form-group">
-                      <label for="">Dispositivo</label>
-                      <select class="form-control md-2" name="Nom" id="idNom" required>
-                        <option selected>Selecciona Dispositivo...</option>
-                        {% for tipo in tipo %}
-                        <option value="{{tipo.idTipoDisp}}">{{tipo.nomTipo}}</option>
-                        {% endfor %}
-                      </select>
-                    </div>
-                    <div class="form-group">
-                      <label for="">Marca</label>
-                      <select class="form-control md-2" name="Mar" id="idMar" required>
-                        <option selected>Selecciona Marca...</option>
-                        {% for marc in marc %}
-                        <option value="{{marc.idMarca}}">{{marc.nomMarca}}</option>
-                        {% endfor %}
-                      </select>
-                    </div>
+
                     <div class="form-group">
                       <label for="">Modelo</label>
                       <select class="form-control md-2" name="Mod" id="idMod" required>
                         <option selected>Selecciona Modelo...</option>
-                        {% for mode in mode %}
+                        {% for mode in modelo %}
                         <option value="{{mode.idModelo}}">{{mode.nomModelo}}</option>
                         {% endfor %}
                       </select>
@@ -102,13 +92,13 @@
                     <div class="form-check">
                       <input class="form-check-input" type="radio"  name="Estado" id="idEstado" value=2>
                       <label class="form-check-label" for="exampleRadios2">
-                        Deshabilitado
+                        En Uso 
                       </label>
                     </div>
                     <div class="form-check disabled">
                       <input class="form-check-input" type="radio"  name="Estado" id="idEstado" value=3 >
                       <label class="form-check-label" for="exampleRadios3">
-                        En Uso
+                        Deshabilitado
                       </label>
                     </div>
                     <br>
@@ -116,11 +106,11 @@
                       <label for="">Sucursal</label>
                       <select class="form-control md-2" name="Suc" id="idSuc" required>
                         <option selected>Selecciona Sucursal...</option>
-                        {% for sucursa in sucursa %}
+                        {% for sucursa in sucursal %}
                         <option value="{{sucursa.idSucursal}}">{{sucursa.nomSucursal}}</option>
                         {% endfor %}
                       </select>
-                    </div>                   
+                    </div>                 
                     <div class="form-group">
                       <label for="">Usuario</label>
                       <input type="text" class="form-control md-2" name="Usu" id="idUsu" placeholder="Ingrese rut xxxxxxxx-x">
@@ -129,11 +119,35 @@
                   </form>
                 </div>
                 <div class="modal-footer">
-                  <button type="button" id="btGuardar" class="btn btn-primary">Guardar Cambios</button>
-                  <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancelar</button>
+                  <button type="button" id="GuardarDispositivo" class="btn btn-primary">Guardar Cambios</button>
+                  <button type="button" class="btn btn-secondary" id="cancelarDisp" data-dismiss="modal">Cancelar</button>
                 </div>
               </div>
             </div>
           </div>
-          
+          <!-- ACA TIENE QUE IR EL MODAL PARA EDITAR -->
+
+          <div class="modal" id="modalDispositivoEd" tabindex="-1" role="dialog">
+            <div class="modal-dialog" role="document">
+              <div class="modal-content">
+                <div class="modal-header">
+                  <h5 class="modal-title" >Editar Dispositivo</h5>
+                  <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                  </button>
+                </div>
+                
+                <div class="modal-body">
+                  <form class="frmDispositivoEd"> 
+                    <!--------------------------------------------------------------------------------->                                   
+                    
+                  </form>
+                </div>
+                <div class="modal-footer" id="footerDispEd">
+    
+                </div>
+              </div>
+            </div>
+          </div>
+
    {% endblock %}

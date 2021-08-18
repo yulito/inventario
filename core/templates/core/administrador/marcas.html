@@ -1,0 +1,67 @@
+{% extends 'core/index.html' %}
+   {% load static %}
+   {% block content %}
+
+   <div class="listMarca">
+    <h1 >lista de Marcas</h1>
+   </div>
+   <div>
+    <div>
+      <button type="button" name="btAgregar" id="btAgregar" class="btn  btn-info"> Agregar</button>
+     </div>
+             <br>
+          <table class="table table-bordered">
+              <thead>
+                <tr>
+                  <th scope="col">ID</th> 
+                  <th scope="col">Marca</th>
+                  <th scope="col">Acción</th> 
+                </tr>
+              </thead>
+              <tbody>
+                {% for marcaa in marcaa %}
+                <tr>
+                  <th scope="row">{{ marcaa.idMarca }}</th>
+                  <td>{{ marcaa.nomMarca}}</td>
+                  <td>
+                    <button type="button" name="btEditar" id="btEditar" class="btn  btn-success" onclick="editarMarca('{{marcaa.idMarca}}')"> Editar </button>
+                  </td>
+                </tr>
+                {% endfor %} 
+              </tbody>
+            </table>
+   </div>
+  
+
+          <!------------------------AQUÍ DEBE DE IR EL MODAL GUARDAR------------------------>
+          
+          <div class="modal" id="modalMarca" tabindex="-1" role="dialog">
+            <div class="modal-dialog" role="document">
+              <div class="modal-content">
+                <div class="modal-header">
+                  <h5 class="modal-title" id="tituloModelMarca">Ingresar Marca</h5>
+                  <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                  </button>
+                </div>                
+                <div class="modal-body">
+                  <form>                                      
+                    <div class="form-group">
+                      <label for="correlativo">ID</label>
+                      <input type="number" class="form-control md-2" name="idmarca" id="idmarca" disabled>
+                    </div>
+                    <div class="form-group">
+                        <label for="">Nombre Marca</label>
+                        <input type="text" class="form-control md-2" name="marca" id="marca" required=True >
+                      </div>
+                  </form>
+                </div>
+                <div class="modal-footer">
+                  <button type="button" id="Guardar" class="btn btn-primary">Guardar</button>
+                  <button type="button" id="Cancelar" class="btn btn-secondary" data-dismiss="modal">Cancelar</button>
+                </div>
+              </div>
+            </div>
+          </div>
+
+   {% endblock %}

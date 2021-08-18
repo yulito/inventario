@@ -1,0 +1,118 @@
+{% extends 'core/index.html' %}
+   {% load static %}
+   {% block content %}
+   <div class="listModelo">
+    <h1>lista de Modelo</h1>
+   </div>
+   <div>
+    <button type="button" name="btAgregarModelo" id="btAgregarModelo" class="btn  btn-info"> Agregar</button>
+   </div>
+           <br>
+        <table class="table table-bordered">
+            <thead>
+              <tr>
+                <th scope="col">ID</th> 
+                <th scope="col">Modelo</th>                  
+                <th scope="col">Marca</th> 
+                <th scope="col">Tipo Dispositivo</th> 
+                <th scope="col">Acción</th> 
+              </tr>
+            </thead>
+            <tbody>
+              {% for modelo in modelo %}
+              <tr>
+                <th scope="row">{{ modelo.idModelo }}</th>
+                <td>{{ modelo.nomModelo}}</td>
+                <td>{{modelo.marcaa.nomMarca}}</td>
+                <td>{{ modelo.tipo_dispositivoo.nomTipo }}</td>                
+                <td>
+                  <button type="button" name="btEditarModelo" id="btEditarModelo" class="btn  btn-success" onclick="editarModelo('{{modelo.idModelo}}')"> Editar </button>
+                  <!--<button type="button" name="btEliminar" id="btEliminar" class="btn  btn-danger" > Eliminar</button>-->
+                </td>
+              </tr>
+              {% endfor %} 
+            </tbody>
+          </table>
+   
+          <!------------------------AQUÍ DEBE DE IR EL MODAL------------------------>
+          
+          <div class="modal" id="modalModelo" tabindex="-1" role="dialog">
+            <div class="modal-dialog" role="document">
+              <div class="modal-content">
+                <div class="modal-header">
+                  <h5 class="modal-title" id="#tituloModelModelo">Ingresar Modelo</h5>
+                  <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                  </button>
+                </div>
+                
+                <div class="modal-body">
+                  <form class="frmModelo">                                    
+                    <div class="form-group">
+                      <label for="correlativo">ID</label>
+                      <input type="text" class="form-control md-2" name="modelo" id="idModelo" disabled>
+                    </div>
+                    <div class="form-group">
+                      <label for="">Modelo</label>
+                      <input type="text" class="form-control md-2" name="nombreMod" id="idNombreMod" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="">Marca</label>
+                        <select class="form-control md-2" name="marcaMod" id="idMarcaMod" required>
+                          <option disabled selected >Selecciona el Marca...</option>
+                          {% for marca in marca %}
+                          <option value="{{marca.idMarca}}">{{marca.nomMarca}}</option>
+                          {% endfor %}
+                        </select>
+                      </div> 
+                    <div class="form-group">
+                      <label for="">Tipo Dispositivo</label>
+                      <select class="form-control md-2" name="modeloTipo" id="idModeloTipo" required>
+                        <option disabled selected >Selecciona el Tipo...</option>
+                        {% for tipo in tipo %}
+                        <option value="{{tipo.idTipoDisp}}">{{tipo.nomTipo}}</option>
+                        {% endfor %} 
+                      </select>
+                    </div> 
+   
+                  </form>
+                </div>
+                <div class="modal-footer">
+                  <button type="button" id="GuardarModelo" class="btn btn-primary">Guardar</button>
+                  <button type="button" id="CancelarModelo" class="btn btn-secondary" data-dismiss="modal">Cancelar</button>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <!------------------------- ACA EL MODAL PARA EDITAR ------------------------>
+
+    
+            <div class="modal" id="modalModeloEd" tabindex="-1" role="dialog">
+           <div class="modal-dialog" role="document">
+             <div class="modal-content">
+               <div class="modal-header">
+                 <h5 class="modal-title" >Editar Modelo</h5>
+                 <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                   <span aria-hidden="true">&times;</span>
+                 </button>
+               </div>
+               
+               <div class="modal-body">
+                 <form class="frmModeloEd"> 
+                 
+                   <!--------------------------------------------------------------------------------->                                   
+                  
+                </form>
+            </div>
+            <div class="modal-footer" id="footermodEd">
+
+            </div>
+          </div>
+        </div>
+      </div>
+
+          
+          
+        
+   {% endblock %}
